@@ -1,3 +1,5 @@
+var timerId = null;
+
 function startingPage() {
 
     var gameLevel = document.getElementById("gameLevel").value;
@@ -37,6 +39,7 @@ function startGame() {
     }
     //timer
     document.getElementById('timer').innerHTML = gameTime;
+  
     createBalloons(fullBalloons, gameLevel);
 
     //full balloons
@@ -44,6 +47,22 @@ function startGame() {
 
     //empty balloons
     document.getElementById("empty").innerHTML = emptyBalloons;
+
+    timeCount(gameTime+1); //starts clock
+
+    function timeCount(seconds) {
+
+        seconds = seconds - 1;
+
+        if (seconds == -1) {
+            return false;
+        }
+
+        document.getElementById("timer").innerHTML = seconds;
+        setTimeout(() => {
+            timeCount(seconds);
+        }, 1000);
+    }
 
 
     function createBalloons(fullBalloons, gameLevel) {
