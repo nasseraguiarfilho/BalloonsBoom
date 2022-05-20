@@ -14,36 +14,35 @@
 
 </head>
 
-<body>
+<body onload="startGame()">
     <div class="bg">
         <div class="row">
             <div class="col-4">
                 <img src="imagens/balao_azul_grande.png" alt="Full balloon" class="mt-3 ms-1">
                 <h3 class="ms-4 mt-1" id="full">2</h3>
             </div>
-            <!-- Balloons to pow here -->
+            <!-- Balloons to pow -->
+            <div class="col-8 mt-3" id="balloonsArea1"> 
+                
+            </div>
         </div>
         <div class="row">
             <div class="col-4">
                 <img src="imagens/balao_azul_grande_estourado.png" alt="empty balloon" class="mt-3 ms-1">
                 <h3 class="ms-4 mt-1" id="empty">2</h3>
             </div>
-            <!-- Balloons to pow here -->
+            <div class="col-8 mt-3" id="balloonsArea2"> 
+                
+            </div>
         </div>
         <div class="row">
             <div class="col-4">
-                <img src="imagens/cronometro.png" alt="Time" class="mt-3 ms-1">
+                <h2 class="text-dark ms-2">Time Left:</h2>
+                 <h2 class="ms-5 mt-1 text-danger" id="timer">2</h3>
             </div>
-            <!-- Balloons to pow here -->
+            <div class="col-8 mt-3" id="balloonsArea3"> 
         </div>
-        <div class="row">
-            <div class="col-4">
-                <img src="imagens/iniciar.png" alt="Start" class="mt-3 ms-1">
-                <p><small class="form-text text-muted ms-1">Click here to start!</small>
-            </div>
-            </p>
-            <!-- Balloons to pow here -->
-        </div>
+
 
     </div>
 
