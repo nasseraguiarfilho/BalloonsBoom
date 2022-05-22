@@ -22,3 +22,10 @@ html {
   height: 150px;
   background-repeat: no-repeat;
 }
+
+.center {
+  text-align: center;
+  text-justify: auto;
+  width: 200px;
+  height: 25px;
+}

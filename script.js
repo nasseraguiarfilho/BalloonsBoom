@@ -34,12 +34,12 @@ function startGame() {
     }
 
     if (gameLevel == 3) {
-        gameTime = 10;
+        gameTime = 5;
         fullBalloons = 30;
     }
     //timer
     document.getElementById('timer').innerHTML = gameTime;
-  
+
     createBalloons(fullBalloons, gameLevel);
 
     //full balloons
@@ -48,33 +48,94 @@ function startGame() {
     //empty balloons
     document.getElementById("empty").innerHTML = emptyBalloons;
 
-    timeCount(gameTime+1); //starts clock
+    timeCount(gameTime + 1); //starts clock
+
+
 
     function timeCount(seconds) {
 
         seconds = seconds - 1;
 
         if (seconds == -1) {
+            gameOver();
             return false;
         }
 
         document.getElementById("timer").innerHTML = seconds;
-        setTimeout(() => {
+        timerId = setTimeout(() => {
             timeCount(seconds);
         }, 1000);
     }
 
 
     function createBalloons(fullBalloons, gameLevel) {
-        for (let area = 1; area <= gameLevel; area++) {
-            for (let i = 0; i < 10; i++) {
-                var balloon = document.createElement("img");
-                balloon.src = "imagens/balao_azul_pequeno.png";
-                balloon.style.margin = "10px";
-                document.getElementById("balloonsArea" + area).appendChild(balloon);
-            }
+
+        for (let i = 0; i < gameLevel * 10; i++) {
+            var balloon = document.createElement("img");
+            balloon.src = "imagens/balao_azul_pequeno.png";
+            balloon.style.margin = "10px";
+            balloon.id = "b" + (i + 1);
+            document.getElementById("balloonsArea1").appendChild(balloon);
+            balloon.onclick = function () { pow(this); };
         }
 
     }
+
+    function pow(balloon) {
+        document.getElementById(balloon.id).setAttribute("onclick", "");
+        document.getElementById(balloon.id).src = "imagens/balao_azul_pequeno_estourado.png";
+
+        point();
+
+
+    }
+
+    function point() {
+        document.getElementById("full").innerHTML--;
+        document.getElementById("empty").innerHTML++;
+
+        var full = document.getElementById("full").innerHTML;
+        var empty = document.getElementById("empty").innerHTML;;
+
+        verifyGame(full);
+    }
+
+    function verifyGame(full) {
+        if (full == 0) {
+            document.getElementById("result").className = "col-4 mt-3 ms-3 rounded bg-success text-center visible";
+            document.getElementById("result").innerHTML = "You won!";
+            gameOver();
+        }
+        if (full > 0 && document.getElementById("timer").innerHTML == 0) {
+            gameOver();
+        }
+
+    }
+
+    function gameOver() {
+        clearTimeout(timerId);
+        clearBalloonClicks();
+        document.getElementById("result").className = "col-4 mt-3 ms-3 rounded bg-danger center visible";
+        document.getElementById("result").innerHTML = "You lost!";
+        document.getElementById("restart").className = "btn btn-primary mt-2 ms-3 visible text-center";
+    }
+
+    function clearBalloonClicks() {
+        var i = 1;
+        while (document.getElementById("b" + i)) {
+            document.getElementById("b" + i).onclick = "";
+            i++;
+        }
+    }
+
+    function restartGame() {
+        window.location.href = "index.html";
+    }
+
+
 }
+
+
+
+
 
